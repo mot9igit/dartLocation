@@ -20,14 +20,16 @@ dartLocation.panel.Home = function (config) {
             border: true,
             hideMode: 'offsets',
             items: [{
-                title: _('dartlocation_items'),
-                layout: 'anchor',
+                title: _('dartlocation_panel_city'),
                 items: [{
-                    html: _('dartlocation_intro_msg'),
+                    html: _('dartlocation_panel_city_desc'),
                     cls: 'panel-desc',
-                }, {
-                    xtype: 'dartlocation-grid-items',
-                    cls: 'main-wrapper',
+                },{
+                    xtype: 'panel',
+                    cls: 'container',
+                    items: [{
+                        xtype: 'dartlocation-grid-city'
+                    }]
                 }]
             }]
         }]

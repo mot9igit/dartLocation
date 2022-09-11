@@ -15,7 +15,8 @@ class dartLocationHomeManagerController extends modExtraManagerController
      */
     public function initialize()
     {
-        $this->dartLocation = $this->modx->getService('dartLocation', 'dartLocation', MODX_CORE_PATH . 'components/dartlocation/model/');
+		$corePath = $this->modx->getOption('dartlocation_core_path', array(), $this->modx->getOption('core_path') . 'components/dartlocation/');
+        $this->dartLocation = $this->modx->getService('dartLocation', 'dartLocation', $corePath . 'model/');
         parent::initialize();
     }
 
@@ -53,13 +54,15 @@ class dartLocationHomeManagerController extends modExtraManagerController
     public function loadCustomCssJs()
     {
         $this->addCss($this->dartLocation->config['cssUrl'] . 'mgr/main.css');
-        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/dartlocation.js');
-        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/misc/utils.js');
-        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/misc/combo.js');
-        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/widgets/items.grid.js');
-        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/widgets/items.windows.js');
-        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/widgets/home.panel.js');
-        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/sections/home.js');
+        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/dartlocation.js?v='.$this->dartLocation->config['version']);
+        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/misc/utils.js?v='.$this->dartLocation->config['version']);
+        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/misc/combo.js?v='.$this->dartLocation->config['version']);
+		$this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/widgets/city/city.grid.js?v='.$this->dartLocation->config['version']);
+		$this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/widgets/city/fields.grid.js?v='.$this->dartLocation->config['version']);
+		$this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/widgets/city/city.windows.js?v='.$this->dartLocation->config['version']);
+		$this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/widgets/city/fields.windows.js?v='.$this->dartLocation->config['version']);
+        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/widgets/home.panel.js?v='.$this->dartLocation->config['version']);
+        $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/sections/home.js?v='.$this->dartLocation->config['version']);
 
         $this->addHtml('<script type="text/javascript">
         dartLocation.config = ' . json_encode($this->dartLocation->config) . ';

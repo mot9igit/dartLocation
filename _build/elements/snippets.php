@@ -1,33 +1,17 @@
 <?php
 
 return [
-    'dartLocation' => [
-        'file' => 'dartlocation',
-        'description' => 'dartLocation snippet to list items',
+    'dl.geo_data' => [
+        'file' => 'dl.geo_data',
+        'description' => 'dartLocation snippet to show geodata on the page',
         'properties' => [
             'tpl' => [
                 'type' => 'textfield',
-                'value' => 'tpl.dartLocation.item',
+                'value' => 'dl.geodata',
             ],
-            'sortby' => [
+            'modal_tpl' => [
                 'type' => 'textfield',
-                'value' => 'name',
-            ],
-            'sortdir' => [
-                'type' => 'list',
-                'options' => [
-                    ['text' => 'ASC', 'value' => 'ASC'],
-                    ['text' => 'DESC', 'value' => 'DESC'],
-                ],
-                'value' => 'ASC',
-            ],
-            'limit' => [
-                'type' => 'numberfield',
-                'value' => 10,
-            ],
-            'outputSeparator' => [
-                'type' => 'textfield',
-                'value' => "\n",
+                'value' => 'dl.modal',
             ],
             'toPlaceholder' => [
                 'type' => 'combo-boolean',
@@ -35,4 +19,14 @@ return [
             ],
         ],
     ],
+	'dl.get_cities' => [
+		'file' => 'dl.get_cities',
+		'description' => 'dartLocation snippet to list filled cities on the page',
+		'properties' => [
+			'tpl' => [
+				'type' => 'textfield',
+				'value' => 'dl.cities',
+			]
+		],
+	]
 ];

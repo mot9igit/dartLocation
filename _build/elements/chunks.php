@@ -1,12 +1,16 @@
 <?php
 
 return [
-    'tpl.dartLocation.item' => [
-        'file' => 'item',
+    'dl.geodata' => [
+        'file' => 'dl.geodata',
         'description' => '',
     ],
-    'tpl.dartLocation.office' => [
-        'file' => 'office',
+    'dl.modal' => [
+        'file' => 'dl.modal',
         'description' => '',
     ],
+	'dl.cities' => [
+		'file' => 'dl.cities',
+		'description' => '',
+	],
 ];

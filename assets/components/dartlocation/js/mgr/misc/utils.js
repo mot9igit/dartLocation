@@ -4,6 +4,50 @@ dartLocation.utils.renderBoolean = function (value) {
         : String.format('<span class="red">{0}</span>', _('no'));
 };
 
+dartLocation.utils.userLink = function (value, id, blank) {
+    if (!value) {
+        return '';
+    } else if (!id) {
+        return value;
+    }
+
+    return String.format(
+        '<a href="?a=security/user/update&id={0}" class="sl-link" target="{1}">{2}</a>',
+        id,
+        (blank ? '_blank' : '_self'),
+        value
+    );
+};
+
+dartLocation.utils.productLink = function (value, id, blank) {
+    if (!value) {
+        return '';
+    } else if (!id) {
+        return value;
+    }
+
+    return String.format(
+        '<a href="index.php?a=resource/update&id={0}" class="ms2-link" target="{1}">{2}</a>',
+        id,
+        (blank ? '_blank' : '_self'),
+        value
+    );
+};
+
+dartLocation.utils.renderImage = function (value) {
+    if (Ext.isEmpty(value)) {
+        value = dartLocation.config['default_thumb'];
+    } else {
+        if (!/\/\//.test(value)) {
+            if (!/^\//.test(value)) {
+                value = '/' + value;
+            }
+        }
+    }
+
+    return String.format('<img src="{0}" />', value);
+};
+
 dartLocation.utils.getMenu = function (actions, grid, selected) {
     var menu = [];
     var cls, icon, title, action;
