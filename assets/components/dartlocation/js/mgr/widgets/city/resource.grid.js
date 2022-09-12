@@ -24,7 +24,7 @@ dartLocation.grid.Resource = function (config) {
             }
         },
         baseParams: {
-            action: 'mgr/city/resource/getlist',
+            action: 'mgr/resource/getlist',
             resource: config.record.id
         },
         url: dartLocation.config.connector_url,
@@ -98,7 +98,7 @@ Ext.extend(dartLocation.grid.Resource, MODx.grid.Grid, {
         MODx.Ajax.request({
             url: dartLocation.config.connector_url,
             params: {
-                action: 'mgr/city/resource/get',
+                action: 'mgr/resource/get',
                 id: id
             },
             listeners: {
@@ -134,7 +134,7 @@ Ext.extend(dartLocation.grid.Resource, MODx.grid.Grid, {
             text: _('remove'),
             url: this.config.url,
             params: {
-                action: 'mgr/city/resource/remove',
+                action: 'mgr/resource/remove',
                 ids: Ext.util.JSON.encode(ids),
             },
             listeners: {

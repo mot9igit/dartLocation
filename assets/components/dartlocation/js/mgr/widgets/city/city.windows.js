@@ -11,9 +11,16 @@ dartLocation.window.City = function (config) {
             xtype: 'textfield',
             name: 'key',
             fieldLabel: _('dartlocation_city_grid_key'),
-            emptyText: _('dartlocation_city_grid_key_empty'),
+            description: _('dartlocation_city_grid_key_empty'),
             anchor: '99%',
             allowBlank: false
+        },{
+            xtype: 'textfield',
+            name: 'fias_id',
+            fieldLabel: _('dartlocation_city_grid_fias_id'),
+            description: _('dartlocation_city_grid_fias_id_empty'),
+            anchor: '99%',
+            allowBlank: true
         },{
             xtype: 'textfield',
             name: 'city',
@@ -105,8 +112,16 @@ Ext.extend(dartLocation.window.UpdateCity, MODx.Window, {
                             xtype: 'textfield',
                             name: 'key',
                             fieldLabel: _('dartlocation_city_grid_key'),
+                            description: _('dartlocation_city_grid_key_empty'),
                             anchor: '99%',
                             allowBlank: false
+                        },{
+                            xtype: 'textfield',
+                            name: 'fias_id',
+                            fieldLabel: _('dartlocation_city_grid_fias_id'),
+                            description: _('dartlocation_city_grid_fias_id_empty'),
+                            anchor: '99%',
+                            allowBlank: true
                         }, {
                             xtype: 'textfield',
                             name: 'city',
@@ -202,9 +217,16 @@ Ext.extend(dartLocation.window.DuplicateCity, MODx.Window, {
             xtype: 'textfield',
             name: 'key',
             fieldLabel: _('dartlocation_city_grid_key'),
-            emptyText: _('dartlocation_city_grid_key_empty'),
+            description: _('dartlocation_city_grid_key_empty'),
             anchor: '99%',
             allowBlank: false
+        },{
+            xtype: 'textfield',
+            name: 'fias_id',
+            fieldLabel: _('dartlocation_city_grid_fias_id'),
+            description: _('dartlocation_city_grid_fias_id_empty'),
+            anchor: '99%',
+            allowBlank: true
         },{
             xtype: 'textfield',
             name: 'city',

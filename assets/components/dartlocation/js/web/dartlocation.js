@@ -1,10 +1,14 @@
+/*
+ *   Author: Petropavlovsky Artem https://dart.agency/
+ *   Date: 12/09/2022
+ */
 var dartlocation = {
     options: {
         wrapper: '.dl_wrap',
         geo_close: '.dl_city_close',
         geo_more: '.dl_city_more_info',
         geo_city: '.dl_geo_city',
-        geo_store: '.dl_geo_store'
+        geo_checked: '.city_checked'
     },
     initialize: function () {
         var action = 'city/status';
@@ -12,7 +16,7 @@ var dartlocation = {
             dl_action: action
         };
         dartlocation.send(data);
-        $(document).on("click", '.city_checked', function(e) {
+        $(document).on("click", dartlocation.options.geo_checked, function(e) {
             e.preventDefault();
             var action = 'city/check';
             var data = {
@@ -21,7 +25,7 @@ var dartlocation = {
             };
             dartlocation.send(data);
         });
-        $('.city_complete').dAutocomplete({
+        $(dartlocation.options.geo_checked).dAutocomplete({
             serviceUrl: dartlocationConfig['actionUrl'],
             minChars: 3,
             type: "POST",
@@ -29,11 +33,10 @@ var dartlocation = {
                 dl_action: 'get/cities'
             },
             onSelect: function (suggestion) {
-                //alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
                 var action = 'city/check';
                 var data = {
                     dl_action: action,
-                    data: suggestion
+                    data: suggestion.data
                 };
                 dartlocation.send(data);
             }
@@ -70,8 +73,7 @@ var dartlocation = {
                 if(data_r.data.hasOwnProperty('pls')){
                     if(data_r.data.pls.citycheck == 1){
                         $(dartlocation.options.geo_city).text(data_r.data.pls.city);
-                        $(dartlocation.options.geo_store).text(data_r.data.pls.store);
-                        $('.sl_city_close').attr("data-data", JSON.stringify(data_r.data.location));
+                        $('.dl_city_close').attr("data-data", JSON.stringify(data_r.data));
                         $(".city_popup").addClass('active');
                     }
                 }

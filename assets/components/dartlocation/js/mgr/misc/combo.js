@@ -129,9 +129,9 @@ Ext.reg('dartlocation-combo-user', dartLocation.combo.User);
 dartLocation.combo.City = function (config) {
     config = config || {};
     Ext.applyIf(config, {
-        url: shopLogistic.config.connector_url,
+        url: dartLocation.config.connector_url,
         baseParams: {
-            action: 'mgr/city/load/city',
+            action: 'mgr/load/city',
         },
         name: 'city',
         hiddenName: 'city',

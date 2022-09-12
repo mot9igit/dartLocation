@@ -82,8 +82,6 @@ class dartLocation
 					'cssUrl' => $this->config['cssUrl'] . 'web/',
 					'jsUrl' => $this->config['jsUrl'] . 'web/',
 					'actionUrl' => $this->config['actionUrl'],
-					'dadata_api_key' => $this->modx->getOption('dartlocation_api_key_dadata'),
-
 					'ctx' => $ctx
 				);
 
@@ -99,9 +97,13 @@ class dartLocation
 
 		// init city
 		if(isset($_SESSION['dartlocation'][$ctx])) {
-			$this->modx->setPlaceholders($_SESSION['dartlocation'][$ctx]['pls'], 'dl.');
+			$this->modx->setPlaceholders($_SESSION['dartlocation'][$ctx]['pls'], $this->modx->getOption('dartlocation_phx_prefix'));
+			$response = $this->pdoTools->getArray('dartLocationCity', array('fias_id' => $_SESSION['dartlocation'][$ctx]['pls']['fias_id']));
+			if (count($response)) {
+				$fields = $this->getFields($response['id']);
+				$this->modx->setPlaceholders(array_merge($response, $fields),  $this->modx->getOption('dartlocation_phx_prefix'));
+			}
 		}
-
 		return $load;
 	}
 
@@ -136,6 +138,7 @@ class dartLocation
 			5 => 'email',
 			6 => 'address',
 			7 => 'address_full',
+			8 => 'fias_id'
 		);
 	}
 
@@ -192,6 +195,11 @@ class dartLocation
 		return $res;
 	}
 
+	/*
+	 * Первый запуск скрипта, узнаем местонахождение по IP,
+	 * если оно не известно
+	 */
+
 	public function getCityStatus($data){
 		$ctx = $data['ctx'];
 		$citycheck = 0;
@@ -202,14 +210,27 @@ class dartLocation
 		}
 		if(empty($_SESSION['dartlocation'][$ctx]) || $citycheck){
 			$location = $this->getLoocationByIP();
-			$_SESSION['dartlocation'][$ctx] = $location;
-			$_SESSION['dartlocation'][$ctx]['pls'] = array(
-				'citycheck' => 1,
-				'city' => $location['location']['value']
-			);
+			$this->setLocation($location['location']['data'], $ctx, 1);
 		}
 		return $this->success("", $_SESSION['dartlocation'][$ctx]);
 	}
+
+	/*
+	 * Централизованная функция установка значений
+	 */
+
+	public function setLocation($location, $ctx = 'web', $citycheck = 0){
+		$_SESSION['dartlocation'][$ctx] = $location;
+		$_SESSION['dartlocation'][$ctx]['pls'] = array(
+			'citycheck' => $citycheck,
+			'city' => $location['city_with_type']? : $location['settlement_with_type']? : $location['result'],
+			'fias_id' => $location['city_fias_id']? : $location['fias_id']
+		);
+	}
+
+	/*
+	 * Установка выбранного города из БД
+	 */
 
 	public function setShopCity($data){
 		$ctx = $data['ctx'];
@@ -236,11 +257,7 @@ class dartLocation
 
 	public function checkCity($data){
 		$ctx = $data['ctx'];
-		$_SESSION['dartlocation'][$ctx] = $data['data'];
-		$_SESSION['dartlocation'][$ctx]['pls'] = array(
-			'citycheck' => 0,
-			'city' => $data['data']['city_with_type']? : $data['data']['result']
-		);
+		$this->setLocation($data['data'], $ctx);
 		return $this->success("", array(
 			"reload" => true
 		));
@@ -251,12 +268,7 @@ class dartLocation
 		$pos = array((float) $data['latitude'], (float) $data['longitude']);
 		$dt = $this->getGeoData($pos);
 		$data = $dt['suggestions'][0];
-
-		$_SESSION['dartlocation'][$ctx] = $data;
-		$_SESSION['dartlocation'][$ctx]['pls'] = array(
-			'citycheck' => 0,
-			'city' => $data['data']['city_with_type']? : $data['data']['settlement_with_type']
-		);
+		$this->setLocation($data['data'], $ctx);
 		return $this->success("", array(
 			"reload" => true
 		));
@@ -318,7 +330,7 @@ class dartLocation
 	 * @return type
 	 */
 	public function getFields($city_id) {
-		$response = $this->modx->getCollection('dartLocationFields', array('city' => $city_id));
+		$response = $this->pdoTools->getCollection('dartLocationFields', array('city' => $city_id));
 		$output = array();
 		if (count($response)) {
 			foreach ($response as $item) {

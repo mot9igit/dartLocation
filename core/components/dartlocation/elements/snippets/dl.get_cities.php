@@ -20,19 +20,17 @@ $cities = $modx->getCollection('dartLocationCity');
 
 foreach($cities as $city){
 	$tmp = $city->toArray();
-	$coords = explode(",", $tmp['address_coordinats']);
-	$pos = array((float) trim($coords[0]), (float) trim($coords[1]));
-	if(!$tmp['properties']){
-		$data = json_decode($dartLocation->getGeoData($pos), 1);
-		if(count($data['suggestions'])){
-			$tmp['data'] = str_replace("{", "{ ", json_encode($data['suggestions'][0]));
+	if($tmp['fias_id'] == ''){
+		$data = $dartLocation->dadata->clean("address", $tmp['city']);
+		if(count($data)){
+			$tmp['data'] = str_replace("{", "{ ", json_encode($data[0]));
+			$city->set('fias_id', $data[0]['fias_id']);
+			$city->set('properties', $tmp['data']);
+			$city->save();
 		}
-		$city->set('properties', $tmp['data']);
-		$city->save();
 	}else{
 		$tmp['data'] = json_encode($tmp['properties']);
 	}
-
 	$out['cities'][] =  $tmp;
 }
 

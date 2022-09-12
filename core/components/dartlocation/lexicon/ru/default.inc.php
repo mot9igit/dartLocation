@@ -11,6 +11,8 @@ $_lang['dartlocation_panel_city_desc'] = 'Тут отображаются гор
 $_lang['dartlocation_city_grid_id'] = 'ID';
 $_lang['dartlocation_city_grid_key'] = 'Ключ города';
 $_lang['dartlocation_city_grid_key_empty'] = 'Пример: perm';
+$_lang['dartlocation_city_grid_fias_id'] = 'ФИАС ID - (можно посмотреть <a href="https://dadata.ru/suggestions/#address" target="_blank">тут</a>)';
+$_lang['dartlocation_city_grid_fias_id_empty'] = 'При первом запросе заполнится автоматически';
 $_lang['dartlocation_city_grid_city'] = 'Город';
 $_lang['dartlocation_city_grid_city_r'] = 'Город (склонение)';
 $_lang['dartlocation_city_grid_phone'] = 'Телефон';

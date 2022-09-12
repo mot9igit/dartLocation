@@ -4,6 +4,7 @@
 
     <object class="dartLocationCity" table="dl_city" extends="xPDOSimpleObject">
         <field key="key" dbtype="varchar" precision="255" phptype="string" null="false" default=""/>
+        <field key="fias_id" dbtype="varchar" precision="255" phptype="string" null="false" default=""/>
         <field key="city" dbtype="varchar" precision="255" phptype="string" null="false" default=""/>
         <field key="city_r" dbtype="varchar" precision="255" phptype="string" null="false" default=""/>
         <field key="phone" dbtype="varchar" precision="255" phptype="string" null="false" default=""/>
@@ -17,6 +18,9 @@
         </index>
         <index alias="key" name="key" primary="false" unique="true" type="BTREE">
             <column key="key" length="" collation="A" null="false"/>
+        </index>
+        <index alias="fias_id" name="fias_id" primary="false" unique="true" type="BTREE">
+            <column key="fias_id" length="" collation="A" null="false"/>
         </index>
         <composite alias="fields" class="dartLocationFields" local="id" foreign="city" cardinality="many" owner="local"/>
         <composite alias="resources" class="dartLocationResource" local="id" foreign="city" cardinality="many" owner="local"/>

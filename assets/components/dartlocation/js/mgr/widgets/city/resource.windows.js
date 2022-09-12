@@ -6,7 +6,7 @@ dartLocation.window.CreateCFResource = function (config) {
         url: dartLocation.config.connector_url,
         width: 700,
         autoHeight: true,
-        action: 'mgr/city/resource/create',
+        action: 'mgr/resource/create',
         saveBtnText:_('add'),
         fields: [{
             xtype: 'hidden',
@@ -53,7 +53,7 @@ dartLocation.window.UpdateResource = function (config) {
         autoHeight: true,
         fields: this.getFields(config),
         url: dartLocation.config.connector_url,
-        action: 'mgr/city/resource/update',
+        action: 'mgr/resource/update',
         width: 700
     });
     dartLocation.window.UpdateResource.superclass.constructor.call(this, config);
