@@ -18,16 +18,21 @@ $data = array();
 
 $ctx = $modx->context->key;
 
-if (isset($_SESSION['dartlocation'][$ctx])) {
-	$data = $_SESSION['dartlocation'][$ctx]['pls'];
-}
+$api_key = $modx->getOption('dartlocation_api_key_dadata');
+if($api_key) {
+	if (isset($_SESSION['dartlocation'][$ctx])) {
+		$data = $_SESSION['dartlocation'][$ctx]['pls'];
+	}
 
-$output = $pdoFetch->getChunk($tpl, $data);
-$modal = $pdoFetch->getChunk($modal_tpl, $data);
-$modx->regClientHTMLBlock($modal);
+	$output = $pdoFetch->getChunk($tpl, $data);
+	$modal = $pdoFetch->getChunk($modal_tpl, $data);
+	$modx->regClientHTMLBlock($modal);
 
-if (!empty($toPlaceholder)) {
-	$modx->setPlaceholder($toPlaceholder, $output);
-	return '';
+	if (!empty($toPlaceholder)) {
+		$modx->setPlaceholder($toPlaceholder, $output);
+		return '';
+	}
+	return $output;
+}else{
+	$modx->log(xPDO::LOG_LEVEL_ERROR, 'dartLocation: enter dadata apikey!');
 }
-return $output;

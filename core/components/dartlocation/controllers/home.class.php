@@ -53,7 +53,7 @@ class dartLocationHomeManagerController extends modExtraManagerController
      */
     public function loadCustomCssJs()
     {
-        $this->addCss($this->dartLocation->config['cssUrl'] . 'mgr/main.css');
+        $this->addCss($this->dartLocation->config['cssUrl'] . 'mgr/dartlocation.css?v='.$this->dartLocation->config['version']);
         $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/dartlocation.js?v='.$this->dartLocation->config['version']);
         $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/misc/utils.js?v='.$this->dartLocation->config['version']);
         $this->addJavascript($this->dartLocation->config['jsUrl'] . 'mgr/misc/combo.js?v='.$this->dartLocation->config['version']);

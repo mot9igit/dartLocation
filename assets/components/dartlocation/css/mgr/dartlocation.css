@@ -1,7 +1,20 @@
 /* Grid */
 .dartlocation-dartlocation-row-disabled { font-style: italic; opacity: .6; color: #555; }
 .x-grid3-col-actions { padding: 3px 0 3px 5px; }
-
+.def-panel{
+    padding: 15px 0;
+}
+.no-margin{
+    margin: 0 !important;
+}
+.x-color-palette{
+    width: 100%;
+}
+.dartlocation-row-badge {
+    padding: 4px 10px;
+    border-radius: 3px;
+    background-color: #cacaca;
+}
 /* Actions */
 .action-red { color: darkred !important; }
 .action-green { color: darkgreen !important; }

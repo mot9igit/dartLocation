@@ -23,7 +23,7 @@ return [
 	],
 	'phx_prefix' => [
 		'xtype' => 'textfield',
-		'value' => 'cf.',
+		'value' => 'dl.',
 		'area' => 'shoplogistic_city',
 	],
 	'city_fields' => [
