@@ -19,7 +19,7 @@
         <index alias="key" name="key" primary="false" unique="true" type="BTREE">
             <column key="key" length="" collation="A" null="false"/>
         </index>
-        <index alias="fias_id" name="fias_id" primary="false" unique="true" type="BTREE">
+        <index alias="fias_id" name="fias_id" primary="false" unique="false" type="BTREE">
             <column key="fias_id" length="" collation="A" null="false"/>
         </index>
         <composite alias="fields" class="dartLocationFields" local="id" foreign="city" cardinality="many" owner="local"/>

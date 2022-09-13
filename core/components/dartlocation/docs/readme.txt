@@ -1,7 +1,7 @@
 --------------------
 dartLocation
 --------------------
-Author: John Doe <john@doe.com>
+Author: Artem Petropavlovsky <info@dart.agency>
 --------------------
 
-A basic Extra for MODx Revolution.
+A Geolocation Extra for MODx Revolution based on dadata.ru.

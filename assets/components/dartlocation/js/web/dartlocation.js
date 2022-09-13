@@ -8,7 +8,8 @@ var dartlocation = {
         geo_close: '.dl_city_close',
         geo_more: '.dl_city_more_info',
         geo_city: '.dl_geo_city',
-        geo_checked: '.city_checked'
+        geo_checked: '.city_checked',
+        geo_complete: '.city_complete'
     },
     initialize: function () {
         var action = 'city/status';
@@ -25,7 +26,7 @@ var dartlocation = {
             };
             dartlocation.send(data);
         });
-        $(dartlocation.options.geo_checked).dAutocomplete({
+        $(dartlocation.options.geo_complete).dAutocomplete({
             serviceUrl: dartlocationConfig['actionUrl'],
             minChars: 3,
             type: "POST",
